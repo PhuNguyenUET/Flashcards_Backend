@@ -1,20 +1,22 @@
 package com.flashcards.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
+import jakarta.persistence.*;
 @Entity
 @Table
-public class Flashcards {
+public class Flashcard {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
 	private int flashcardId;
 	@Column
 	private String word;
 	@Column 
 	private String definition;
+	
+	@ManyToOne
+	@JoinColumn(name = "listId")
+	private FlashcardsList list;
+	
 	public int getFlashcardId() {
 		return flashcardId;
 	}
