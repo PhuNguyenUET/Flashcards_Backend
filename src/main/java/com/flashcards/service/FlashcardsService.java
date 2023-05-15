@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.flashcards.model.Flashcard;
+import com.flashcards.model.FlashcardList;
 import com.flashcards.repository.FlashcardsRepository;
 
 @Service
@@ -19,11 +20,11 @@ public class FlashcardsService {
 		return flashcardsLists;
 	}
 	
-	/* public List<Flashcard> getAllFlashcardsInList(int listId) {
+	public List<Flashcard> getAllFlashcardsInList(FlashcardList flashcardList) {
 		List <Flashcard> flashcardsLists = new ArrayList<>();
-		flashcardsRepository.findAllByListId(listId).forEach(flashcard -> flashcardsLists.add(flashcard));
+		flashcardsRepository.findAllByListId(flashcardList).forEach(flashcard -> flashcardsLists.add(flashcard));
 		return flashcardsLists;
-	} */
+	}
 	
 	public Flashcard getFlashcardById (int id) {
 		return flashcardsRepository.findById(id).get();

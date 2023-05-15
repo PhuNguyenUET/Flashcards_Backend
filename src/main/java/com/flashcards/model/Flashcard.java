@@ -1,22 +1,32 @@
 package com.flashcards.model;
 
 import jakarta.persistence.*;
+import java.io.Serializable;
+
 @Entity
 @Table
-public class Flashcard {
+public class Flashcard implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
 	private int flashcardId;
+	
 	@Column
 	private String word;
+	
 	@Column 
 	private String definition;
 	
-	@ManyToOne
+	@ManyToOne (fetch = FetchType.LAZY)
 	@JoinColumn(name = "listId")
 	private FlashcardList list;
 	
+	public FlashcardList getList() {
+		return list;
+	}
+	public void setList(FlashcardList list) {
+		this.list = list;
+	}
 	public int getFlashcardId() {
 		return flashcardId;
 	}
