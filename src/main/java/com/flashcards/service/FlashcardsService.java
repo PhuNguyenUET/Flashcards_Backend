@@ -19,11 +19,11 @@ public class FlashcardsService {
 		return flashcardsLists;
 	}
 	
-	public List<Flashcard> getAllFlashcardsInList(int listId) {
+	/* public List<Flashcard> getAllFlashcardsInList(int listId) {
 		List <Flashcard> flashcardsLists = new ArrayList<>();
 		flashcardsRepository.findAllByListId(listId).forEach(flashcard -> flashcardsLists.add(flashcard));
 		return flashcardsLists;
-	}
+	} */
 	
 	public Flashcard getFlashcardById (int id) {
 		return flashcardsRepository.findById(id).get();

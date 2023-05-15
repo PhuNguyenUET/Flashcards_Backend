@@ -14,7 +14,7 @@ public class FlashcardListService {
 	private FlashcardListRepository flashcardlistRepository;
 	
 	public List<FlashcardList> getAllLists() {
-		List <FlashcardList> flashcardLists = new ArrayList<>();
+		List <FlashcardList> flashcardLists = new ArrayList<FlashcardList>();
 		flashcardlistRepository.findAll().forEach(list -> flashcardLists.add(list));
 		return flashcardLists;
 	}
