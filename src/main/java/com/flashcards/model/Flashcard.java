@@ -15,7 +15,7 @@ public class Flashcard {
 	
 	@ManyToOne
 	@JoinColumn(name = "listId")
-	private FlashcardsList list;
+	private FlashcardList list;
 	
 	public int getFlashcardId() {
 		return flashcardId;

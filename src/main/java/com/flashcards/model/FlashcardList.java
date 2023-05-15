@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table
-public class FlashcardsList {
+public class FlashcardList {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
