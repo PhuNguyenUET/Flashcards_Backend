@@ -3,27 +3,35 @@ package com.flashcards.model;
 import java.util.List;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.io.Serializable;
 
 @Entity
 @Table
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@EntityListeners(EntityListeners.class)
 public class FlashcardList{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
-	private int listId;
+	private Long listId;
 	
-	@Column
+	@Column(unique = true)
 	private String name;
 	
-	@OneToMany(mappedBy = "list", cascade = CascadeType.ALL, fetch = FetchType.LAZY) 
+	@OneToMany(mappedBy = "list", cascade = CascadeType.ALL, fetch = FetchType.EAGER) 
 	private List<Flashcard> flashcards;
 
-	public int getListId() {
+	public Long getListId() {
 		return listId;
 	}
 
-	public void setListId(int listId) {
+	public void setListId(Long listId) {
 		this.listId = listId;
 	}
 
@@ -47,10 +55,10 @@ public class FlashcardList{
 	// mismatch between JSON and @Entity structure
 	// So I did it manually
 	public void setFlashcards(List<Flashcard> flashcards) {
-		this.flashcards = flashcards;
 		for (Flashcard card: flashcards) {
 			card.setList(this);
 		}
+		this.flashcards = flashcards;
 	}
 	
 	public void addWord(Flashcard card) {

@@ -36,20 +36,20 @@ public class FlashcardsController {
 	}
 	
 	@GetMapping("/flashcardlist/{listId}")
-	private ResponseEntity<FlashcardListDto> getList(@PathVariable int listId) {
+	private ResponseEntity<FlashcardListDto> getList(@PathVariable Long listId) {
 		FlashcardList list = flashcardListService.getListById(listId);
 		FlashcardListDto listResponse = modelMapper.map(list, FlashcardListDto.class);
 		return ResponseEntity.ok().body(listResponse);
 	}
 	
 	@GetMapping("/flashcards/{listId}")
-	private List<FlashcardDto> getFlashcards(@PathVariable int listId) {
+	private List<FlashcardDto> getFlashcards(@PathVariable Long listId) {
 		FlashcardList list = flashcardListService.getListById(listId);
 		List <Flashcard> flashcards = list.getFlashcards();
 		return flashcards.stream().map(card -> modelMapper.map(card, FlashcardDto.class)).collect(Collectors.toList());
 	}
 	
-	@GetMapping("flashcards") 
+	@GetMapping("/flashcards") 
 	private List<FlashcardDto> getAllFlashcards() {
 		return flashcardsService.getAllFlashcards().stream().map(card -> modelMapper.map(card, FlashcardDto.class)).collect(Collectors.toList());
 	}
@@ -62,25 +62,25 @@ public class FlashcardsController {
 	}
 	
 	@DeleteMapping("/flashcardlist/{listId}")
-	private void deleteList(@PathVariable int listId) {
+	private void deleteList(@PathVariable Long listId) {
 		flashcardListService.delete(listId);
 	}
 	
 	@DeleteMapping("/flashcard/{listId}/{word}")
-	private void deleteCard(@PathVariable int listId, @PathVariable String word) {
+	private void deleteCard(@PathVariable Long listId, @PathVariable String word) {
 		FlashcardList list = flashcardListService.getListById(listId);
 		flashcardsService.delete(list, word);
 	}
 	
 	@PostMapping("/flashcardlists")
-	private int saveList (@RequestBody FlashcardListDto listDto) {
+	private Long saveList (@RequestBody FlashcardListDto listDto) {
 		FlashcardList listRequest = modelMapper.map(listDto, FlashcardList.class);
 		flashcardListService.saveOrUpdate(listRequest);
 		return listRequest.getListId();
 	}
 	
 	@PostMapping("/flashcards/{listId}")
-	private int saveCard (@RequestBody FlashcardDto cardDto, @PathVariable int listId) {
+	private Long saveCard (@RequestBody FlashcardDto cardDto, @PathVariable Long listId) {
 		Flashcard card = modelMapper.map(cardDto, Flashcard.class);
 		FlashcardList list = flashcardListService.getListById(listId);
 		card.setList(list);

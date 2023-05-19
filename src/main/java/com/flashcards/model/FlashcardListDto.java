@@ -3,8 +3,11 @@ package com.flashcards.model;
 import java.io.Serializable;
 import java.util.List;
 
+import lombok.Data;
+
+@Data
 public class FlashcardListDto{
-	private int listId;
+	private Long listId;
 	private String name;
 	private List<Flashcard> flashcards;
 	
@@ -15,10 +18,10 @@ public class FlashcardListDto{
 	public void setFlashcards(List<Flashcard> flashcards) {
 		this.flashcards = flashcards;
 	}
-	public int getListId() {
+	public Long getListId() {
 		return listId;
 	}
-	public void setListId(int listId) {
+	public void setListId(Long listId) {
 		this.listId = listId;
 	}
 	public String getName() {

@@ -10,6 +10,6 @@ import org.springframework.data.repository.query.Param;
 import com.flashcards.model.Flashcard;
 import com.flashcards.model.FlashcardList;
 
-public interface FlashcardsRepository extends JpaRepository<Flashcard, Integer> {
+public interface FlashcardsRepository extends JpaRepository<Flashcard, Long> {
 	Flashcard findByWordAndList(String word, FlashcardList list);
 }

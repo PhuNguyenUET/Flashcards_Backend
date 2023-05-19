@@ -23,7 +23,7 @@ public class FlashcardListService {
 		return flashcardlistRepository.findByName(name);
 	}
 	
-	public FlashcardList getListById (int id) {
+	public FlashcardList getListById (Long id) {
 		return flashcardlistRepository.findById(id).get();
 	}
 	
@@ -31,7 +31,7 @@ public class FlashcardListService {
 		flashcardlistRepository.save(list);
 	}
 	
-	public void delete (int id) {
+	public void delete (Long id) {
 		flashcardlistRepository.deleteById(id);
 	}
 	

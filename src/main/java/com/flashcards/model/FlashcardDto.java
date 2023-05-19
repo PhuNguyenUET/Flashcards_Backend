@@ -2,14 +2,27 @@ package com.flashcards.model;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.Data;
+
+@Data
 public class FlashcardDto{
-	private int flashcardId;
+	private Long flashcardId;
 	private String word;
 	private String definition;
-	public int getFlashcardId() {
+	@JsonIgnore
+	private FlashcardList list;
+	public FlashcardList getList() {
+		return list;
+	}
+	public void setList(FlashcardList list) {
+		this.list = list;
+	}
+	public Long getFlashcardId() {
 		return flashcardId;
 	}
-	public void setFlashcardId(int flashcardId) {
+	public void setFlashcardId(Long flashcardId) {
 		this.flashcardId = flashcardId;
 	}
 	public String getWord() {
