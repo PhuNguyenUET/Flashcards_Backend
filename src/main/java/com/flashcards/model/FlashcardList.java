@@ -40,7 +40,7 @@ public class FlashcardList implements Serializable {
 	}
 
 	
-	// HIbernate perform a persist on the parent first, then the children
+	// Hibernate perform a persist on the parent first, then the children
 	// minus foreign key second, then the child foreign key
 	// with the parent's primary key
 	// But the third step failed somehow (maybe due to
@@ -56,5 +56,19 @@ public class FlashcardList implements Serializable {
 	public void addWord(Flashcard card) {
 		flashcards.add(card);
 		card.setList(this);
+	}
+	
+	public void addWords(List <Flashcard> cards) {
+		for (Flashcard card : cards) {
+			addWord(card);
+		}
+	}
+	
+	public void deleteWord(Flashcard card) {
+		flashcards.remove(card);
+	}
+	
+	public void deleteById(int cardId) {
+		flashcards.remove(cardId);
 	}
 }

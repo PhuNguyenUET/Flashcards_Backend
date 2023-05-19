@@ -20,12 +20,6 @@ public class FlashcardsService {
 		return flashcardsLists;
 	}
 	
-	public List<Flashcard> getAllFlashcardsInList(FlashcardList flashcardList) {
-		List <Flashcard> flashcardsLists = new ArrayList<>();
-		flashcardsRepository.findAllByListId(flashcardList).forEach(flashcard -> flashcardsLists.add(flashcard));
-		return flashcardsLists;
-	}
-	
 	public Flashcard getFlashcardById (int id) {
 		return flashcardsRepository.findById(id).get();
 	}

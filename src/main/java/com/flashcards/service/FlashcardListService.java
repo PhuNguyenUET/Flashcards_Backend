@@ -19,6 +19,10 @@ public class FlashcardListService {
 		return flashcardLists;
 	}
 	
+	public FlashcardList getListByName (String name) {
+		return flashcardlistRepository.findByName(name);
+	}
+	
 	public FlashcardList getListById (int id) {
 		return flashcardlistRepository.findById(id).get();
 	}

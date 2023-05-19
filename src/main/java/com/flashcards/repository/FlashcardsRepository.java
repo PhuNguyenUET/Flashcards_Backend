@@ -11,6 +11,4 @@ import com.flashcards.model.Flashcard;
 import com.flashcards.model.FlashcardList;
 
 public interface FlashcardsRepository extends JpaRepository<Flashcard, Integer> {
-	@Query ("SELECT f from Flashcard f WHERE f.list = :list")
-	List <Flashcard> findAllByListId(@Param("list")FlashcardList list);
 }

@@ -5,5 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 import com.flashcards.model.FlashcardList;
 
 public interface FlashcardListRepository extends JpaRepository <FlashcardList, Integer>{
-
+	FlashcardList findByName (String name);
 }
