@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 @Entity
 @Table
-public class FlashcardList implements Serializable {
+public class FlashcardList{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
@@ -58,17 +58,7 @@ public class FlashcardList implements Serializable {
 		card.setList(this);
 	}
 	
-	public void addWords(List <Flashcard> cards) {
-		for (Flashcard card : cards) {
-			addWord(card);
-		}
-	}
-	
 	public void deleteWord(Flashcard card) {
 		flashcards.remove(card);
-	}
-	
-	public void deleteById(int cardId) {
-		flashcards.remove(cardId);
 	}
 }

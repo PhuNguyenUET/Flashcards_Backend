@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 @Entity
 @Table
-public class Flashcard implements Serializable{
+public class Flashcard{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column

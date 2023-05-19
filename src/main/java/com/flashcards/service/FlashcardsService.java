@@ -32,6 +32,15 @@ public class FlashcardsService {
 		flashcardsRepository.deleteById(id);
 	}
 	
+	public void delete (Flashcard flashcard) {
+		flashcardsRepository.delete(flashcard);
+	}
+	
+	public void delete (FlashcardList list, String word) {
+		Flashcard card = flashcardsRepository.findByWordAndList(word, list);
+		flashcardsRepository.delete(card);
+	}
+	
 	public void update (Flashcard flashcard, int id) {
 		flashcardsRepository.save(flashcard);
 	}

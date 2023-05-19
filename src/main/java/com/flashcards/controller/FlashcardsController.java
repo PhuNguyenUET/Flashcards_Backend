@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.flashcards.service.FlashcardListService;
@@ -41,7 +42,7 @@ public class FlashcardsController {
 		return ResponseEntity.ok().body(listResponse);
 	}
 	
-	@GetMapping("/flashcard/{listId}")
+	@GetMapping("/flashcards/{listId}")
 	private List<FlashcardDto> getFlashcards(@PathVariable int listId) {
 		FlashcardList list = flashcardListService.getListById(listId);
 		List <Flashcard> flashcards = list.getFlashcards();
@@ -53,8 +54,8 @@ public class FlashcardsController {
 		return flashcardsService.getAllFlashcards().stream().map(card -> modelMapper.map(card, FlashcardDto.class)).collect(Collectors.toList());
 	}
 	
-	@GetMapping("flashcard/{name}")
-	private ResponseEntity<FlashcardListDto> getFlashcardByName (@PathVariable String name) {
+	@GetMapping("flashcardlist")
+	private ResponseEntity<FlashcardListDto> getFlashcardListByName (@RequestParam(value = "name") String name) {
 		FlashcardList list = flashcardListService.getListByName(name);
 		FlashcardListDto listResponse = modelMapper.map(list, FlashcardListDto.class);
 		return ResponseEntity.ok().body(listResponse);
@@ -65,10 +66,10 @@ public class FlashcardsController {
 		flashcardListService.delete(listId);
 	}
 	
-	@DeleteMapping("/flashcard/{listId}/{cardId}")
-	private void deleteCard(@PathVariable int listId, @PathVariable int cardId) {
+	@DeleteMapping("/flashcard/{listId}/{word}")
+	private void deleteCard(@PathVariable int listId, @PathVariable String word) {
 		FlashcardList list = flashcardListService.getListById(listId);
-		list.deleteById(cardId);
+		flashcardsService.delete(list, word);
 	}
 	
 	@PostMapping("/flashcardlists")
@@ -82,7 +83,8 @@ public class FlashcardsController {
 	private int saveCard (@RequestBody FlashcardDto cardDto, @PathVariable int listId) {
 		Flashcard card = modelMapper.map(cardDto, Flashcard.class);
 		FlashcardList list = flashcardListService.getListById(listId);
-		list.addWord(card);
+		card.setList(list);
+		flashcardsService.saveOrUpdate(card);
 		return card.getFlashcardId();
 	}
 	
@@ -93,7 +95,7 @@ public class FlashcardsController {
 		return ResponseEntity.ok().body(listDto);
 	}
 	
-	@PostMapping("/flashcards")
+	@PutMapping("/flashcards")
 	private ResponseEntity<FlashcardDto> updateCard (@RequestBody FlashcardDto cardDto) {
 		Flashcard card = modelMapper.map(cardDto, Flashcard.class);
 		flashcardsService.saveOrUpdate(card);

@@ -11,4 +11,5 @@ import com.flashcards.model.Flashcard;
 import com.flashcards.model.FlashcardList;
 
 public interface FlashcardsRepository extends JpaRepository<Flashcard, Integer> {
+	Flashcard findByWordAndList(String word, FlashcardList list);
 }
